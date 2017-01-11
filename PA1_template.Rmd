@@ -8,7 +8,26 @@ output:
 
 ## Loading and preprocessing the data
 
+First, we load the data into a data frame, called "activity". Using str, we can see what the raw data looks like.
 
+```{r load}
+activity <- read.csv(unz("activity.zip", "activity.csv"))
+str(activity)
+```
+
+Next, we will add a column called "timestamp" that converts the date and interval variables into a single posixct object for each observation. First, we'll need to transform the interval variable to strings of matching length. 0 will become "0000", 5 "0005", up to 2355 to "2355".
+```{r preprocess}
+
+##transform interval to format "0000", "0005", "0010", etc.
+##format = "d" indicates interval is currently an integer, 
+##and flag appends 0s as necessary to the front of the string.
+activity$interval <- 
+      formatC(activity$interval, width = 4, format = "d", flag = "0")
+
+##paste date and interval, and convert to date object using strptime
+activity$timestamp <- with(activity, paste(date, interval))
+activity$timestamp <- strptime(activity$timestamp, format = "%Y-%m-%d %H%M")
+```
 
 ## What is mean total number of steps taken per day?
 
