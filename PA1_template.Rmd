@@ -31,7 +31,26 @@ activity$timestamp <- strptime(activity$timestamp, format = "%Y-%m-%d %H%M")
 
 ## What is mean total number of steps taken per day?
 
+For this we will make a histogram of the daily totals for steps using the base plotting system, along with lines showing the mean and median number of steps. These calculations will ignore days for which there are no observed step data.
 
+```{r histogram}
+##plot histogram with titles, mean and median lines, and legend
+hist(with(activity, tapply(steps, date, sum)), breaks = 10,
+     main = "Histogram of Daily Total Steps", xlab = "Steps")
+abline(v = mean(with(activity, tapply(steps, date, sum)), na.rm = TRUE), 
+       col = "blue")
+abline(v = median(with(activity, tapply(steps, date, sum)), na.rm = TRUE), 
+       col = "red")
+legend("topright", lty=c(1,1), col = c("blue", "red"), 
+       legend = c("Mean", "Median"))
+
+##calculate mean and median for output below
+stepMean <- mean(with(activity, tapply(steps, date, sum)), na.rm = TRUE)
+stepMedian <-median(with(activity, tapply(steps, date, sum)), na.rm = TRUE)
+
+```
+
+As shown on the histogram, the mean and median daily step totals are very close. The mean number of steps is `r stepMean`. The median number of steps is `r stepMedian`.
 
 ## What is the average daily activity pattern?
 
