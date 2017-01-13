@@ -54,7 +54,7 @@ legend("topright", lwd=c(3,1), col = c("blue", "red"),
 ![](PA1_template_files/figure-html/histogram1-1.png)<!-- -->
 
 ```r
-##calculate mean and median for output below
+##calculate mean and median for text block below
 stepMean <- mean(with(activity, tapply(steps, date, sum)), na.rm = TRUE)
 stepMedian <-median(with(activity, tapply(steps, date, sum)), na.rm = TRUE)
 ```
@@ -75,8 +75,12 @@ plot(intMeans$Group.1, intMeans$x, type = "l", xlab = "Time of Day",
 ![](PA1_template_files/figure-html/interval plot-1.png)<!-- -->
 
 ```r
+##calculate maximum step interval for text block below.
+maxInt <- intMeans[intMeans$x == max(intMeans$x), 1]
 rm(intMeans)
 ```
+
+The five-minute interval containing the maximum number of steps is 835 (using the 24-hr clock).
 
 ## Imputing missing values
 
@@ -170,7 +174,7 @@ legend("topright", lwd=c(1,1), col = c("blue", "red"),
 ![](PA1_template_files/figure-html/histogram2-1.png)<!-- -->
 
 ```r
-##calculate mean and median for output below
+##calculate mean and median for text block below
 stepMean2 <- mean(with(activity2, tapply(steps, date, sum)))
 stepMedian2 <-median(with(activity2, tapply(steps, date, sum)))
 ```
